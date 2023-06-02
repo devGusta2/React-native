@@ -181,7 +181,7 @@ function ConsultaAluno({navigation}){
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 24,backgroundColor:'#000456'}} >
+    <View style={{ flex: 1, padding: 24,backgroundColor:'#459adc'}} >
 
       <View>
         <Text style={styles.title}>Alunos Cadastrados</Text>
@@ -239,7 +239,7 @@ function ConsultaAluno({navigation}){
     }, []);
 
     return (
-      <View style={{ flex: 1, padding: 24,backgroundColor:'#000456'}} >
+      <View style={{ flex: 1, padding: 24,backgroundColor:'#459adc'}} >
 
         <View>
           <Text style={styles.title}>Professores Cadastrados</Text>
@@ -262,7 +262,7 @@ function ConsultaAluno({navigation}){
 
 
 
-        <TouchableOpacity title="Voltar"   onPress={() => navigation.navigate('Home')} style={styles.button}>
+        <TouchableOpacity title="Voltar"   onPress={() => navigation.navigate('telaProfessor')} style={styles.button}>
                   <View  style={styles.rowButton}>
                   <Image style={styles.imgButton} source={"https://clipart-library.com/images/ziX5GKgAT.png"}/>
                   <Text  style={styles.textButtonStyle1}>Voltar</Text>
@@ -316,7 +316,7 @@ function DetailsScreen({ navigation }) {
               </View>
             </TouchableOpacity>
 
-              <TouchableOpacity title="Voltar" onPress={() => navigation.navigate('Home')} style={styles.button}>
+              <TouchableOpacity title="Voltar" onPress={() => navigation.navigate('telaProfessor')} style={styles.button}>
                 <View  style={styles.rowButton}>
                 <Image style={styles.imgButton} source={"https://clipart-library.com/images/ziX5GKgAT.png"}/>
                 <Text  style={styles.textButtonStyle1}>Voltar</Text>
@@ -343,10 +343,10 @@ return(
            <TouchableOpacity title="Aluno" onPress= {()=>navigation.navigate('telaAluno')} style={styles.card}>
                 <View  style={styles.columnButton}>
                 <Image style={styles.imgButtonCard} source={"https://cdn-icons-png.flaticon.com/512/57/57073.png"}/>
-                <Text  style={styles.textButtonCard}>Aluno</Text>
+                <Text  style={styles.textButtonCard1}>Aluno</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity title="Aluno" onPress={() => navigation.navigate('Home')} style={styles.card}>
+            <TouchableOpacity title="Aluno" onPress={() => navigation.navigate('telaProfessor')} style={styles.card}>
                 <View  style={styles.columnButton}>
                 <Image style={styles.imgButtonCard1} source={"https://icons.veryicon.com/png/o/miscellaneous/people-4/teacher-14.png"}/>
                 <Text  style={styles.textButtonCard}>Professor</Text>
@@ -366,7 +366,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Principal">
-        <Stack.Screen name="Home" component={HomeScreen} />        
+        <Stack.Screen name="telaProfessor" component={HomeScreen} />        
         <Stack.Screen name="Details" component={DetailsScreen} /> 
         <Stack.Screen name="BLA" component={BLA} />
         <Stack.Screen name="Principal" component={Principal} />        
@@ -418,11 +418,17 @@ const styles = StyleSheet.create({
     fontSize:'18pt',
     color:'white',
   },
+  textButtonCard1:{
+    fontWeight:'800',
+    fontSize:'18pt',
+    color:'white',
+    marginLeft:"1.3em"
+  },
   textButtonCard:{
     fontWeight:'800',
     fontSize:'18pt',
-    color:'black',
-    marginLeft:"0.7em"
+    color:'white',
+    marginLeft:"0.3em"
   },
   imgButton:{
     height:'3em',
@@ -435,7 +441,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
   background:{
-    backgroundColor:'#000456',
+    backgroundColor:'#459adc',
     height:'100%',
     width:'100%',
     alignItems:'center',
@@ -478,7 +484,7 @@ const styles = StyleSheet.create({
   card:{
     height:'8em',
     width:'8em',
-    backgroundColor:'#FFC80B',
+    backgroundColor:'white',
     borderRadius:'10px',
     alignItems:'center',
   },
@@ -489,5 +495,9 @@ const styles = StyleSheet.create({
     alignItems:'center',
     margin:'auto',
     marginTop:'80%'
+  },
+  telaInicialContainer:{
+     backgroundColor:'#459adc',
+     height:'100%'
   }
 });
