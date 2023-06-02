@@ -21,10 +21,10 @@ function HomeScreen({ navigation }) {
     navigation.navigate('BLA')
 
   } 
-  
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    
+
 
       <View style={styles.background}>
 
@@ -45,7 +45,7 @@ function HomeScreen({ navigation }) {
             </View>
 
       </View>
-  
+
     </View>
   );
 }
@@ -86,14 +86,16 @@ return(
 
 
 
-function cadastroAluno({navigate}){
-    const [aluno,setAluno] = useState()
+function cadastroAluno({navigation}){
+    const [nome,setNome] = useState()
+    const [turma,setTurma] = useState()
     const [dados,setDados] = useState()
-  
-  
+
+
     const verificar = ()=>{   
-      const valores = aluno
-      
+      const valores = nome
+      const valores2 = turma
+
       fetch('http://localhost:8080/projeto-evento/aluno-inserir.php', {
         method: 'post',
         header:{
@@ -101,16 +103,17 @@ function cadastroAluno({navigate}){
           'Content-type': 'application/json'
         },
         body:JSON.stringify({
-          aluno: aluno,				//n sei se isso aq vai interfirir ent n sei
+          nome: nome,				//n sei se isso aq vai interfirir ent n sei
+          turma: turma,
         })			
       })
-      setDados(valores)        
+      setDados(valores, valores2)        
     } 
 
     return(
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <View style={styles.background}>
-     
+
           <View style={styles.boxButton}>
           <Text style={styles.textButtonStyle2}> Cadastrar Aluno </Text>
                 <TextInput                         
@@ -118,7 +121,13 @@ function cadastroAluno({navigate}){
                     placeholder='Digite o nome do aluno'
 
                     autoFocus={true}     
-                    onChangeText = {text =>setAluno(text)}
+                    onChangeText = {text =>setNome(text)}
+                  />  
+                  <TextInput                         
+                    style={styles.inptStyle}   
+                    placeholder='Digite a turma do aluno'
+    
+                    onChangeText = {text =>setTurma(text)}
                   />    
             <TouchableOpacity title="Insert Aluno" onPress= {()=> verificar()} style={styles.button}>
               <View  style={styles.rowButton}>
@@ -127,21 +136,21 @@ function cadastroAluno({navigate}){
               </View>
             </TouchableOpacity>
 
-              <TouchableOpacity title="Voltar" onPress={() => navigation.navigate('telaAluno')} style={styles.button}>
-                <View  style={styles.rowButton}>
-                <Image style={styles.imgButton} source={"https://clipart-library.com/images/ziX5GKgAT.png"}/>
-                <Text  style={styles.textButtonStyle1}>Voltar</Text>
-                </View>
-              </TouchableOpacity>
+            <TouchableOpacity title="Voltar"   onPress={() => navigation.navigate('telaAluno')} style={styles.button}>
+                  <View  style={styles.rowButton}>
+                  <Image style={styles.imgButton} source={"https://clipart-library.com/images/ziX5GKgAT.png"}/>
+                  <Text  style={styles.textButtonStyle1}>Voltar</Text>
+                  </View>
+        </TouchableOpacity>
           </View>
 
       </View>
 
-      
-  
-    
+
+
+
     </View>
-      
+
     );
 }
 
@@ -150,12 +159,12 @@ function cadastroAluno({navigate}){
 
 
 
-function ConsultaAluno({navigate}){
+function ConsultaAluno({navigation}){
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  
+
   const consultarAluno = async () => {
     try {
       const response = await fetch('http://localhost:8080/projeto-evento/aluno-json.php');
@@ -179,15 +188,15 @@ function ConsultaAluno({navigate}){
       </View>
 
       {isLoading ? <ActivityIndicator/> : (
-        
+
         <FlatList
-          
+
 
           data={data}
           keyExtractor={({ idAluno }, index) => idAluno}
           renderItem={({ item }) => (
 
-            <Text style={styles.listProf}>{item.idAluno}, {item.nomeAluno}</Text>
+            <Text style={styles.listProf}>{item.idAluno}, {item.nomeAluno}, {item.turma}</Text>
           )}
         />
       )}
@@ -196,11 +205,11 @@ function ConsultaAluno({navigate}){
 
 
       <TouchableOpacity title="Voltar"   onPress={() => navigation.navigate('telaAluno')} style={styles.button}>
-                <View  style={styles.rowButton}>
-                <Image style={styles.imgButton} source={"https://clipart-library.com/images/ziX5GKgAT.png"}/>
-                <Text  style={styles.textButtonStyle1}>Voltar</Text>
-                </View>
-              </TouchableOpacity>
+                  <View  style={styles.rowButton}>
+                  <Image style={styles.imgButton} source={"https://clipart-library.com/images/ziX5GKgAT.png"}/>
+                  <Text  style={styles.textButtonStyle1}>Voltar</Text>
+                  </View>
+        </TouchableOpacity>
 
   </View>
     </View>
@@ -237,9 +246,9 @@ function ConsultaAluno({navigate}){
         </View>
 
         {isLoading ? <ActivityIndicator/> : (
-          
+
           <FlatList
-            
+
 
             data={data}
             keyExtractor={({ idProfessor }, index) => idProfessor}
@@ -258,22 +267,22 @@ function ConsultaAluno({navigate}){
                   <Image style={styles.imgButton} source={"https://clipart-library.com/images/ziX5GKgAT.png"}/>
                   <Text  style={styles.textButtonStyle1}>Voltar</Text>
                   </View>
-                </TouchableOpacity>
-  
+        </TouchableOpacity>
+
     </View>
       </View>
     );
   };
 
 function DetailsScreen({ navigation }) {
-    
+
   const [professor,setProfessor] = useState()
   const [dados,setDados] = useState()
 
 
   const verificar = ()=>{   
     const valores = professor
-    
+
 		fetch('http://localhost:8080/projeto-evento/professor-inserir.php', {
 			method: 'post',
 			header:{
@@ -286,11 +295,11 @@ function DetailsScreen({ navigation }) {
 		})
     setDados(valores)        
   } 
-  
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <View style={styles.background}>
-     
+
           <View style={styles.boxButton}>
           <Text style={styles.textButtonStyle2}> Cadastrar Professor </Text>
                 <TextInput                         
@@ -317,9 +326,9 @@ function DetailsScreen({ navigation }) {
 
       </View>
 
-      
-  
-    
+
+
+
     </View>
   );
 }
@@ -362,7 +371,7 @@ export default function App() {
         <Stack.Screen name="BLA" component={BLA} />
         <Stack.Screen name="Principal" component={Principal} />        
         <Stack.Screen name="telaAluno" component={AlunoScreen} />       
-         
+
         <Stack.Screen name="telaCadastroAluno" component={cadastroAluno}/>
         <Stack.Screen name="telaConsultaAluno" component={ConsultaAluno}/>
       </Stack.Navigator>
@@ -389,7 +398,7 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     gap:'2em',
     alignItems:'center',
-    marginTop:'70%'
+    marginTop:'50%'
   },
   textButtonStyle:{
     fontSize:'18pt',
