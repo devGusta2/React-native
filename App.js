@@ -13,12 +13,12 @@ function HomeScreen({ navigation }) {
 
   const verificar = ()=>{
 
-      navigation.navigate('Details')
+      navigation.navigate('CadastrarProfessor')
 
   } 
   const verificarBLA = ()=>{
 
-    navigation.navigate('BLA')
+    navigation.navigate('ConsultaProfessor')
 
   } 
 
@@ -27,7 +27,7 @@ function HomeScreen({ navigation }) {
 
 
       <View style={styles.background}>
-
+      <Image style={{height:'11em',width:'100%',marginTop:'-0em', position:'absolute',zIndex:'5'}} source={"https://i.pinimg.com/originals/a6/c7/e6/a6c7e6a9d641ccf2d91162adf3f44ff0.png"}/>
             <View style={styles.boxButton}>
               <TouchableOpacity title="Insert Professor" onPress= {()=> verificar()} style={styles.button}>
                 <View  style={styles.rowButton}>
@@ -43,7 +43,7 @@ function HomeScreen({ navigation }) {
                   </View>
                 </TouchableOpacity>
             </View>
-
+            <Image style={{height:'17em',width:'100%',marginTop:'35em', position:'absolute',zIndex:'5'}} source={"https://i.pinimg.com/originals/a6/c7/e6/a6c7e6a9d641ccf2d91162adf3f44ff0.png"}/>
       </View>
 
     </View>
@@ -52,15 +52,15 @@ function HomeScreen({ navigation }) {
 
 function AlunoScreen({navigation}){//colocar os dois botoes
       const consultaAluno=()=>{
-          navigation.navigate('telaConsultaAluno')// função pro botao que vai para a parte de consulta de aluno
+          navigation.navigate('ConsultaAluno')// função pro botao que vai para a parte de consulta de aluno
       }
 
       const cadastroAluno=()=>{
-          navigation.navigate('telaCadastroAluno')// funcao para o botao que vai para parte de cadastro do aluno
+          navigation.navigate('CadastroAluno')// funcao para o botao que vai para parte de cadastro do aluno
       }
 return(
       <View style={styles.background}>
-
+<Image style={{height:'11em',width:'100%',marginTop:'-0em', position:'absolute',zIndex:'5'}} source={"https://i.pinimg.com/originals/a6/c7/e6/a6c7e6a9d641ccf2d91162adf3f44ff0.png"}/>
       <View style={styles.boxButton}>
         <TouchableOpacity title="Insert Professor" onPress= {()=> cadastroAluno()} style={styles.button}>
           <View  style={styles.rowButton}>
@@ -76,7 +76,7 @@ return(
             </View>
           </TouchableOpacity>
       </View>
-
+      <Image style={{height:'17em',width:'100%',marginTop:'35em', position:'absolute',zIndex:'5'}} source={"https://i.pinimg.com/originals/a6/c7/e6/a6c7e6a9d641ccf2d91162adf3f44ff0.png"}/>
     </View>
 );
 
@@ -186,7 +186,7 @@ function ConsultaAluno({navigation}){
       <View>
         <Text style={styles.title}>Alunos Cadastrados</Text>
       </View>
-
+      <View style={styles.cuboApresnt} >
       {isLoading ? <ActivityIndicator/> : (
 
         <FlatList
@@ -196,10 +196,11 @@ function ConsultaAluno({navigation}){
           keyExtractor={({ idAluno }, index) => idAluno}
           renderItem={({ item }) => (
 
-            <Text style={styles.listProf}>{item.idAluno}, {item.nomeAluno}, {item.turma}</Text>
+            <Text style={styles.listProf}> {item.nomeAluno}, {item.turma}</Text>
           )}
         />
       )}
+      </View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
 
@@ -244,20 +245,21 @@ function ConsultaAluno({navigation}){
         <View>
           <Text style={styles.title}>Professores Cadastrados</Text>
         </View>
-
+        <View style={styles.cuboApresnt} >
         {isLoading ? <ActivityIndicator/> : (
 
           <FlatList
 
 
             data={data}
-            keyExtractor={({ idProfessor }, index) => idProfessor}
+           keyExtractor={({ idProfessor }, index) => idProfessor}
             renderItem={({ item }) => (
 
-              <Text style={styles.listProf}>{item.idProfessor}, {item.nomeProfessor}</Text>
+              <Text style={styles.listProf}>{item.nomeProfessor}</Text>
             )}
           />
         )}
+        </View>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
 
@@ -332,13 +334,15 @@ function DetailsScreen({ navigation }) {
     </View>
   );
 }
-function Principal({ navigation }){
+function Usuário({ navigation }){
 
 
 return(
 
 <View style={styles.telaInicialContainer}>
-<Image style={{height:'4em',width:'100%',marginTop:'1em', position:'absolute',zIndex:'5'}} source={"https://www.clker.com/cliparts/X/D/R/p/F/R/girly-bright-bunting-hi.png"}/>
+<Image style={{height:'11em',width:'100%',marginTop:'-0em', position:'absolute',zIndex:'5'}} source={"https://i.pinimg.com/originals/a6/c7/e6/a6c7e6a9d641ccf2d91162adf3f44ff0.png"}/>
+<Text  style={{position:'absolute',marginTop:"50%", color:'white', fontSize:'40px', fontFamily:'Times New Roman', fontWeight:'bold', marginLeft:'55px', textAlign:'center'}}>Bem-vindo a Etec{'\n'}de{'\n'}Guaianases</Text>
+
     <View style={styles.rowCards}>
           
            <TouchableOpacity title="Aluno" onPress= {()=>navigation.navigate('telaAluno')} style={styles.card}>
@@ -354,6 +358,7 @@ return(
                 </View>
             </TouchableOpacity>
     </View>
+    <Image style={{height:'16em',width:'100%',marginTop:'139%', position:'absolute',zIndex:'5'}} source={"https://media2.giphy.com/media/d9ZfjDBpd6oSxf6uyF/giphy.gif"}/>
 </View>
 
 
@@ -366,15 +371,15 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Principal">
+      <Stack.Navigator initialRouteName="Usuário">
         <Stack.Screen name="telaProfessor" component={HomeScreen} />        
-        <Stack.Screen name="Details" component={DetailsScreen} /> 
-        <Stack.Screen name="BLA" component={BLA} />
-        <Stack.Screen name="Principal" component={Principal} />        
+        <Stack.Screen name="CadastrarProfessor" component={DetailsScreen} /> 
+        <Stack.Screen name="ConsultaProfessor" component={BLA} />
+        <Stack.Screen name="Usuário" component={Usuário} />        
         <Stack.Screen name="telaAluno" component={AlunoScreen} />       
 
-        <Stack.Screen name="telaCadastroAluno" component={cadastroAluno}/>
-        <Stack.Screen name="telaConsultaAluno" component={ConsultaAluno}/>
+        <Stack.Screen name="CadastroAluno" component={cadastroAluno}/>
+        <Stack.Screen name="ConsultaAluno" component={ConsultaAluno}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -399,7 +404,8 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     gap:'2em',
     alignItems:'center',
-    marginTop:'50%'
+    marginTop:'50%',
+
   },
   textButtonStyle:{
     fontSize:'18pt',
@@ -466,8 +472,11 @@ const styles = StyleSheet.create({
   },
   listProf:{
     fontSize:'15pt',
-    color:'white',
+    color:'black',
     marginTop:'1em',
+    marginLeft:'20px',
+    fontWeight:'bold'
+ 
   },
   columnButton:{
     display:'flex',
@@ -495,11 +504,20 @@ const styles = StyleSheet.create({
     gap:'3em',
     alignItems:'center',
     margin:'auto',
-    marginTop:'80%'
+    marginTop:'100%'
   },
   telaInicialContainer:{
      backgroundColor:'#459adc',
      height:'100%'
   },
+  cuboApresnt:{
+    flex: 1, 
+   
+    justifyContent: 'center',
+    backgroundColor:'white',
+    borderRadius:'10px',
+    marginTop:'30px',
+    border:'2px solid black'
+  }
 
 });
