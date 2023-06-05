@@ -338,8 +338,9 @@ function Principal({ navigation }){
 return(
 
 <View style={styles.telaInicialContainer}>
+<Image style={{height:'4em',width:'100%',marginTop:'1em', position:'absolute',zIndex:'5'}} source={"https://www.clker.com/cliparts/X/D/R/p/F/R/girly-bright-bunting-hi.png"}/>
     <View style={styles.rowCards}>
-
+          
            <TouchableOpacity title="Aluno" onPress= {()=>navigation.navigate('telaAluno')} style={styles.card}>
                 <View  style={styles.columnButton}>
                 <Image style={styles.imgButtonCard} source={"https://cdn-icons-png.flaticon.com/512/57/57073.png"}/>
@@ -387,7 +388,7 @@ const styles = StyleSheet.create({
   button:{
     color:'white',
     height:'5em',
-    backgroundColor:'#FFC80B',
+    backgroundColor:'white',
     borderRadius:'10px',
     width:'20em',
     fontFamily:' arial, sans-serif',
@@ -499,5 +500,6 @@ const styles = StyleSheet.create({
   telaInicialContainer:{
      backgroundColor:'#459adc',
      height:'100%'
-  }
+  },
+
 });
